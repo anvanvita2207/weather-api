@@ -1,5 +1,6 @@
 package com.dice.weatherapi.controller;
 
+import com.dice.weatherapi.annotation.ControllerAuthorization;
 import com.dice.weatherapi.service.RapidApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,9 @@ public class RapidApiController {
      * Retrieves the index of RapidAPI.
      * @return ResponseEntity containing the index data.
      */
+    @ControllerAuthorization
     @GetMapping(value = "/index")
-    public ResponseEntity<Object> getRapidApiIndex() throws Exception{
+    public ResponseEntity<Object> getRapidApiIndex(){
         Object indexData = rapidApiService.getRapidApiIndex();
         return ResponseEntity.ok(indexData);
     }
@@ -42,8 +44,9 @@ public class RapidApiController {
      * Retrieves the status of RapidAPI.
      * @return ResponseEntity containing the status data.
      */
+    @ControllerAuthorization
     @GetMapping(value = "/status")
-    public ResponseEntity<Object> getRapidApiStatus() throws Exception{
+    public ResponseEntity<Object> getRapidApiStatus(){
         Object statusData = rapidApiService.getRapidApiStatus();
         return ResponseEntity.ok(statusData);
 
@@ -54,8 +57,9 @@ public class RapidApiController {
      * @param location The name of the location for which forecast summary is requested.
      * @return ResponseEntity containing the forecast summary data.
      */
+    @ControllerAuthorization
     @GetMapping(value = "/summary/{location}")
-    public ResponseEntity<Object> getForecastSummaryByLocationName(@PathVariable String location) throws Exception{
+    public ResponseEntity<Object> getForecastSummaryByLocationName(@PathVariable String location){
         Object summaryData = rapidApiService.getRapidApiForecastSummaryByLocationName(location);
         return ResponseEntity.ok(summaryData);
     }
@@ -65,8 +69,9 @@ public class RapidApiController {
      * @param location The name of the location for which hourly forecast is requested.
      * @return ResponseEntity containing the hourly forecast data.
      */
+    @ControllerAuthorization
     @GetMapping(value = "/hourly/{location}")
-    public ResponseEntity<Object> getHourlyForecastByLocationName(@PathVariable String location) throws Exception{
+    public ResponseEntity<Object> getHourlyForecastByLocationName(@PathVariable String location){
         Object hourlyData = rapidApiService.getRapidApiHourlyForecastByLocationName(location);
         return ResponseEntity.ok(hourlyData);
     }

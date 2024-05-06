@@ -51,5 +51,18 @@ public class GlobalExceptionHandlerTest {
         assertEquals("Internal Server Error", response.getBody());
         verify(logger).error("Internal Server Error: {}", exception.getMessage(), exception);
     }
+
+    /**
+     * Test handling AuthorizationException.
+     */
+    @Test
+    void testHandleAuthorizationException() {
+        AuthorizationException authorizationException = new AuthorizationException("Authorization" +
+                " Error");
+        ResponseEntity<String> responseEntity = globalExceptionHandler.handleAuthorizationException(authorizationException);
+        assertEquals(HttpStatus.UNAUTHORIZED, responseEntity.getStatusCode());
+        assertEquals("Authorization Error", responseEntity.getBody());
+        verify(logger).error("Authorization Error: {}", authorizationException.getMessage(), authorizationException);
+    }
 }
 

@@ -37,4 +37,17 @@ public class GlobalExceptionHandler {
         logger.error("Internal Server Error: {}", exception.getMessage(), exception);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
     }
+
+    /**
+     * Handles AuthorizationException and returns a ResponseEntity with appropriate error message
+     * and status code.
+     * @param authorizationException AuthorizationException instance.
+     * @return ResponseEntity containing error message and status code.
+     */
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<String> handleAuthorizationException(AuthorizationException authorizationException) {
+        logger.error("Authorization Error: {}", authorizationException.getMessage(),
+                authorizationException);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization Error");
+    }
 }
